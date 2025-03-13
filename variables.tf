@@ -39,17 +39,17 @@ variable "db_password" {
   sensitive   = true
 }
 
-variable "db_allocated_storage" {
-  description = "Storage allocated to the RDS instance (in GB)"
-  type        = number
-  default     = 20
-}
+# variable "db_allocated_storage" {
+#   description = "Storage allocated to the RDS instance (in GB)"
+#   type        = number
+#   default     = 20
+# }
 
-variable "db_instance_class" {
-  description = "Instance class for the RDS instance"
-  type        = string
-  default     = "db.t2.micro"
-}
+# variable "db_instance_class" {
+#   description = "Instance class for the RDS instance"
+#   type        = string
+#   default     = "db.t2.micro"
+# }
 
 variable "db_name" {
   description = "Name of the database"
