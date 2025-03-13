@@ -57,14 +57,14 @@
 #   }
 # }
 
-resource "kubernetes_secret" "rds_credentials" {
-  metadata {
-    name = "rds-credentials"
-  }
+# resource "kubernetes_secret" "rds_credentials" {
+#   metadata {
+#     name = "rds-credentials"
+#   }
 
-  data = {
-    username = var.db_username
-    password = var.db_password
-    host     = aws_db_instance.default.endpoint
-  }
-}
+#   data = {
+#     username = var.db_username
+#     password = var.db_password
+#     host     = aws_db_instance.default.endpoint
+#   }
+# }
