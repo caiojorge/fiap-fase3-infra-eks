@@ -1,3 +1,8 @@
+//// filepath: /home/caio/Projects/challenge-fase3/fiap-fase3-infra-eks/main.tf
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc" "eks_vpc" {
   cidr_block = "10.0.0.0/16"
 
@@ -83,7 +88,7 @@ resource "aws_eks_cluster" "main" {
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
-    subnet_ids = aws_subnet.eks_public_subnet[*].id
+    subnet_ids         = aws_subnet.eks_public_subnet[*].id
     security_group_ids = [aws_security_group.eks_cluster_sg.id]
   }
 }
