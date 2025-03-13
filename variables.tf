@@ -31,12 +31,14 @@ variable "min_size" {
 variable "db_username" {
   description = "Database username"
   type        = string
+  default = "admin"
 }
 
 variable "db_password" {
   description = "Database password"
   type        = string
   sensitive   = true
+  default = "admin123"
 }
 
 # variable "db_allocated_storage" {
@@ -54,6 +56,7 @@ variable "db_password" {
 variable "db_name" {
   description = "Name of the database"
   type        = string
+  default = "mydb"
 }
 
 # output "rds_endpoint" {
@@ -69,4 +72,5 @@ variable "db_name" {
 variable "db_endpoint" {
   description = "Endpoint do RDS existente"
   type        = string
+  default     = "mydb.cjxjxjxjxjxj.us-east-1.rds.amazonaws.com"
 }
