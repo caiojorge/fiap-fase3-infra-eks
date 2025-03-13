@@ -1,4 +1,8 @@
 //// filepath: /home/caio/Projects/challenge-fase3/fiap-fase3-infra-eks/main.tf
+data "aws_iam_role" "labrole" {
+  name = "LabRole"
+}
+
 data "aws_availability_zones" "available" {
   state = "available"
 }
@@ -85,7 +89,7 @@ resource "aws_security_group" "eks_cluster_sg" {
 
 resource "aws_eks_cluster" "main" {
   name     = var.cluster_name
-  role_arn = aws_iam_role.eks_cluster_role.arn
+  role_arn = data.aws_iam_role.labrole.arn
 
   vpc_config {
     subnet_ids         = aws_subnet.eks_public_subnet[*].id
@@ -96,7 +100,7 @@ resource "aws_eks_cluster" "main" {
 resource "aws_eks_node_group" "main" {
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = var.node_group_name
-  node_role_arn   = aws_iam_role.eks_node_role.arn
+  node_role_arn   = data.aws_iam_role.labrole.arn
   subnet_ids      = aws_subnet.eks_private_subnet[*].id
 
   scaling_config {
