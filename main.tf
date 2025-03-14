@@ -27,17 +27,6 @@ resource "aws_subnet" "eks_public_subnet" {
   }
 }
 
-resource "aws_subnet" "eks_private_subnet" {
-  count             = 2
-  vpc_id            = aws_vpc.eks_vpc.id
-  cidr_block        = cidrsubnet(aws_vpc.eks_vpc.cidr_block, 8, count.index + 2)
-  availability_zone = element(data.aws_availability_zones.available.names, count.index)
-
-  tags = {
-    Name = "eks-private-subnet-${count.index}"
-  }
-}
-
 resource "aws_internet_gateway" "eks_igw" {
   vpc_id = aws_vpc.eks_vpc.id
 
@@ -101,7 +90,7 @@ resource "aws_eks_node_group" "main" {
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = var.node_group_name
   node_role_arn   = data.aws_iam_role.labrole.arn
-  subnet_ids      = aws_subnet.eks_private_subnet[*].id
+  subnet_ids      = aws_subnet.eks_public_subnet[*].id
 
   scaling_config {
     desired_size = var.desired_capacity
